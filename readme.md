@@ -30,11 +30,6 @@ main.py
 └── data/
 └── final_report.json ← saved output
 
-yaml
-Copy
-Edit
-
----
 
 ## 🧪 Running the App
 
@@ -45,21 +40,11 @@ pip install -r requirements.txt
 (or manually just use requests, pytest if not using a requirements.txt)
 
 ✅ 2. Run the main script
-bash
-Copy
-Edit
 python main.py
 ✅ 3. Run tests
-bash
-Copy
-Edit
 pytest
 📁 Sample Output
 The final report is saved to:
-
-bash
-Copy
-Edit
 data/final_report.json
 Sample JSON includes:
 
