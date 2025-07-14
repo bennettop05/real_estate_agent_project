@@ -1,65 +1,75 @@
-Video Demo - https://drive.google.com/file/d/1m4RKKaPzMPVcfTODGMo1Bl702A5Cpk0x/view?usp=sharing
-# 🏠 Real Estate Comparable Analysis Agent
+# 🏘️ Real Estate Comparable Analysis Agent
 
-This project is an intelligent agent that fetches Cook County (Illinois) property data via public APIs and performs **comparable analysis** for **industrial real estate**.
-
-It helps identify properties similar in type, location, and value, automating due diligence for investors or analysts.
+This project is an intelligent agent system that automates **comparable property analysis** using **Cook County open data** and the **Attom API**. It identifies similar industrial properties based on PIN and enriches the data with recent sale history for valuation insights.
 
 ---
 
 ## 🚀 Features
 
-- 📦 Fetches up to 1000 property records using Cook County public API
-- 🏭 Filters **industrial property classes**
-- ✅ Validates records with required fields
-- 📊 Finds comparable properties based on:
-  - Property class
-  - Township
-  - Certified total value (±20% or ±30%)
-- 📄 Generates a final report in JSON
-- 🧪 Includes unit tests for core functionalities
+- ✅ Fetches & filters industrial properties from Cook County's open data
+- 🧠 Identifies comparable properties based on class, township, and certified value
+- 📊 Enriches each comparable with **recent sale data** from the Attom API
+- 📄 Generates a full analysis report in `data/final_report.json`
 
 ---
 
-## 🧠 Architecture
+## 📦 Project Structure
 
-main.py
-└── agents/
-└── comparable_agent.py ← core logic agent
-└── tests/
-└── test_sample.py ← pytest test cases
-└── data/
-└── final_report.json ← saved output
+real_estate_agent_project/
+│
+├── agents/
+│ ├── comparable_agent.py # Fetches, filters, and finds comparables
+│ └── attom_agent.py # Integrates Attom API for sales data
+│
+├── data/
+│ └── final_report.json # Auto-generated comparable analysis report
+│
+├── main.py # Entry point to run the complete pipeline
+├── requirements.txt # All dependencies
+└── README.md # This file
 
+---
 
-## 🧪 Running the App
+## 📊 Sample Output
 
-### ✅ 1. Install dependencies
+Each comparable in the final report includes:
 
-```bash
+```json
+{
+  "pin": "13163040320000",
+  "certified_tot": "37000.0",
+  "attom_sale_amount": 17821,
+  "attom_sale_date": "2024-09-14"
+}
+🔐 API Key Setup
+To enable Attom API access, create a .env file:
+
+ATTOM_API_KEY=your_attom_api_key_here
+🛠️ How to Run
+Install dependencies
+
 pip install -r requirements.txt
-(or manually just use requests, pytest if not using a requirements.txt)
+Run the analysis
 
-✅ 2. Run the main script
 python main.py
-✅ 3. Run tests
-pytest
-📁 Sample Output
-The final report is saved to:
+📁 Output
+The analysis report is saved at:
+
 data/final_report.json
-Sample JSON includes:
 
-subject_property
+📌 Technologies
+Python
 
-num_comparables
+Requests
 
-comparables: list of similar industrial properties
+Cook County Data API
 
-avg_certified_value
+Attom Property API
 
-🛠 Technologies Used
-Python 3.10+
+JSON
 
-Public Cook County Property API
+🙋‍♂️ Author
+Aryan Singh
+GenAI & Intelligent Agent Enthusiast
+GitHub
 
-Pytest (for testing)
