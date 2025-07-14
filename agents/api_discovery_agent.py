@@ -1,5 +1,3 @@
-# agents/api_discovery_agent.py
-
 import requests
 import json
 import time
@@ -11,7 +9,7 @@ class APIDiscoveryAgent:
         self.max_rows = max_rows
 
     def get_sample_data(self):
-        """Fetch a sample of the dataset"""
+        
         print("[INFO] Fetching sample data...")
         params = {
             "$limit": self.max_rows
@@ -31,7 +29,6 @@ class APIDiscoveryAgent:
         return []
 
     def analyze_fields(self, data):
-        """Analyze fields and detect variations/inconsistencies"""
         print("[INFO] Analyzing fields...")
         field_types = {}
         for entry in data:
@@ -45,7 +42,7 @@ class APIDiscoveryAgent:
         return field_types
 
     def detect_rate_limit(self):
-        """Cook County uses Socrata, we check headers manually"""
+        
         print("[INFO] Checking rate limit headers...")
         try:
             response = requests.get(self.base_url, params={"$limit": 1})
@@ -61,7 +58,6 @@ class APIDiscoveryAgent:
             print(f"[ERROR] {e}")
             return {}
 
-# Example usage
 if __name__ == "__main__":
     agent = APIDiscoveryAgent()
     sample = agent.get_sample_data()

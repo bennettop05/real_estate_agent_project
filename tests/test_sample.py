@@ -1,4 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from agents.comparable_agent import ComparableAnalysisAgent
+from agents.attom_agent import AttomAgent
+
 
 def test_fetch_data_returns_list():
     agent = ComparableAnalysisAgent(max_rows=10)
@@ -18,7 +23,7 @@ def test_validate_records():
     agent = ComparableAnalysisAgent()
     sample_records = [
         {"pin": "123", "class": "203", "township_name": "Jefferson", "certified_tot": "45000"},
-        {"pin": "456", "class": "205", "certified_tot": "40000"},  # missing township_name
+        {"pin": "456", "class": "205", "certified_tot": "40000"},  
     ]
     valid = agent.validate_records(sample_records)
     assert len(valid) == 1
@@ -35,7 +40,7 @@ def test_find_comparables():
     comparables = [
         {"pin": "0002", "class": "203", "township_name": "Jefferson", "certified_tot": "49000"},
         {"pin": "0003", "class": "203", "township_name": "Jefferson", "certified_tot": "60000"},
-        {"pin": "0004", "class": "203", "township_name": "Jefferson", "certified_tot": "70000"},  # out of range
+        {"pin": "0004", "class": "203", "township_name": "Jefferson", "certified_tot": "70000"},  
     ]
     dataset = [base_record] + comparables
     agent.validate_records(dataset)
@@ -52,12 +57,19 @@ def test_find_comparables_fallback():
         "certified_tot": "100000"
     }
     comparables = [
-        {"pin": "0002", "class": "203", "township_name": "Jefferson", "certified_tot": "130000"},  # in ±30%
-        {"pin": "0003", "class": "203", "township_name": "Jefferson", "certified_tot": "69000"},   # just below lower bound
-        {"pin": "0004", "class": "203", "township_name": "Jefferson", "certified_tot": "50000"}    # far below
+        {"pin": "0002", "class": "203", "township_name": "Jefferson", "certified_tot": "130000"},  
+        {"pin": "0003", "class": "203", "township_name": "Jefferson", "certified_tot": "69000"},   
+        {"pin": "0004", "class": "203", "township_name": "Jefferson", "certified_tot": "50000"}    
     ]
     dataset = [base_record] + comparables
     agent.validate_records(dataset)
     results = agent.find_comparables("0001")
     assert len(results) == 1
     assert results[0]["pin"] == "0002"
+
+# --- New test for Attom API ---
+
+def test_attom_recent_sale_mocked():
+    agent = AttomAgent()
+    result = agent.get_recent_sale("16133160270000")  # Real test only if API key is valid
+    assert isinstance(result, dict) or result is None

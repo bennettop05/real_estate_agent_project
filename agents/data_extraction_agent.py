@@ -1,5 +1,3 @@
-# agents/data_extraction_agent.py
-
 import requests
 import json
 
@@ -67,7 +65,6 @@ class DataExtractionAgent:
         print(f"[WARNING] {len(suspicious)} suspicious records flagged")
         return suspicious
 
-# Example usage
 if __name__ == "__main__":
     agent = DataExtractionAgent()
     raw_data = agent.fetch_data()

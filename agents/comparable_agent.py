@@ -45,7 +45,7 @@ class ComparableAnalysisAgent:
             if all(field in rec for field in required_fields):
                 valid.append(rec)
         print(f"[INFO] {len(valid)} valid records after field check")
-        self.valid_data = valid  # Store for comparables
+        self.valid_data = valid  
         return valid
 
     def find_comparables(self, target_pin, records=None):
@@ -85,7 +85,6 @@ class ComparableAnalysisAgent:
             print(f"[SUCCESS] Found {len(comparables)} comparable properties")
             return comparables
 
-        # Fallback: widen range, ignore township
         print("[INFO] No comparables found. Retrying with wider range ±30% (ignoring township)...")
         lower_bound = target_value * 0.7
         upper_bound = target_value * 1.3
@@ -104,8 +103,6 @@ class ComparableAnalysisAgent:
         print(f"[FALLBACK] Found {len(comparables)} comparables with wider range")
         return comparables
 
-
-# Example usage (for testing this file standalone)
 if __name__ == "__main__":
     agent = ComparableAnalysisAgent()
     raw_data = agent.fetch_data()
@@ -119,7 +116,7 @@ if __name__ == "__main__":
             comparables = agent.find_comparables(sample_pin)
 
             print("\n[COMPARABLES]")
-            for comp in comparables[:5]:  # show top 5
+            for comp in comparables[:5]:  
                 print(json.dumps(comp, indent=2))
         else:
             print("[INFO] No valid industrial property data to analyze.")
