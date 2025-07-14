@@ -1,69 +1,65 @@
+Video Demo - https://drive.google.com/file/d/1m4RKKaPzMPVcfTODGMo1Bl702A5Cpk0x/view?usp=sharing
 # 🏠 Real Estate Comparable Analysis Agent
 
-This project is a smart agent system that fetches property data from Cook County's open API and finds comparable industrial real estate properties based on valuation, township, and class code.
+This project is an intelligent agent that fetches Cook County (Illinois) property data via public APIs and performs **comparable analysis** for **industrial real estate**.
 
-### 🚀 Features
+It helps identify properties similar in type, location, and value, automating due diligence for investors or analysts.
 
-- Fetches up to 1000 property records from Cook County API
-- Filters for industrial properties using custom class codes
-- Finds comparables based on:
+---
+
+## 🚀 Features
+
+- 📦 Fetches up to 1000 property records using Cook County public API
+- 🏭 Filters **industrial property classes**
+- ✅ Validates records with required fields
+- 📊 Finds comparable properties based on:
   - Property class
-  - Township (priority)
-  - Certified total value (±20%, fallback ±30%)
-- Generates a report with:
-  - Subject property
-  - List of comparables
-  - Average certified value
-- Saves output to `data/final_report.json`
+  - Township
+  - Certified total value (±20% or ±30%)
+- 📄 Generates a final report in JSON
+- 🧪 Includes unit tests for core functionalities
 
 ---
 
-### 🛠️ Tech Stack
+## 🧠 Architecture
 
-- Python 3
-- Requests (HTTP client)
-- JSON (data handling)
+main.py
+└── agents/
+└── comparable_agent.py ← core logic agent
+└── tests/
+└── test_sample.py ← pytest test cases
+└── data/
+└── final_report.json ← saved output
 
----
 
-### 📦 Installation
+## 🧪 Running the App
+
+### ✅ 1. Install dependencies
 
 ```bash
-git clone https://github.com/bennettop05/real_estate_agent_project.git
-cd real_estate_agent_project
 pip install -r requirements.txt
-⚙️ Usage
-bash
-Copy
-Edit
+(or manually just use requests, pytest if not using a requirements.txt)
+
+✅ 2. Run the main script
 python main.py
-✅ The agent will:
+✅ 3. Run tests
+pytest
+📁 Sample Output
+The final report is saved to:
+data/final_report.json
+Sample JSON includes:
 
-Fetch data
+subject_property
 
-Identify industrial properties
+num_comparables
 
-Pick one sample property
+comparables: list of similar industrial properties
 
-Find comparables
+avg_certified_value
 
-Save report in data/final_report.json
+🛠 Technologies Used
+Python 3.10+
 
-📄 Sample Output
-json
-Copy
-Edit
-{
-  "subject_property": { ... },
-  "num_comparables": 22,
-  "comparables": [...],
-  "avg_certified_value": 40942.64
-}
-🤖 Future Enhancements
-Add a Streamlit or Flask dashboard for interactive filtering
+Public Cook County Property API
 
-Accept custom PIN input via CLI or chatbot
-
-Export comparables to CSV/Excel
-
-Connect to multiple counties (multi-agent setup)
+Pytest (for testing)
